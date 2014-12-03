@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+        <title>Zones</title>
+    </h:head> 
+
+    <h:body>
+        <h:form id="form1">
+            <p:dataTable id="dtZones" selectionMode="single" sortMode="multiple"
+                         value="#{zonesPageBean.zones}" selection="#{zonesPageBean.selectedZone}"
+                         var="z">
+                <p:column headerText="NPCs" width="50">
+                    <a href="faces/Npc.xhtml?zone=#{z.shortName}">NPCs</a>
+                </p:column>
+                <p:column headerText="Zone ID" sortBy="#{z.zoneIdNumber}" width="50">
+                    <h:outputText value="#{z.zoneIdNumber}"/>
+                </p:column>
+                <p:column headerText="Short Name" sortBy="#{z.shortName}" width="125">
+                    <h:outputText value="#{z.shortName}"/>
+                </p:column>
+                <p:column headerText="Long Name" sortBy="#{z.longName}" width="275">
+                    <h:outputText value="#{z.longName}"/>
+                </p:column>
+                <p:column headerText="ZEM" sortBy="#{z.zoneExpMultiplier}" width="50">
+                    <h:outputText value="#{z.zoneExpMultiplier}"/>
+                </p:column>
+                <p:column headerText="Hot Zone" sortBy="#{z.hotZone}" width="50">
+                    <h:outputText value="#{z.hotZone}"/>
+                </p:column>
+                <p:column headerText="Min Level" sortBy="#{z.minLevel}" width="50">
+                    <h:outputText value="#{z.minLevel}"/>
+                </p:column>
+                <p:column headerText="Safe XYZ" sortBy="#{z.safeX}" width="200">
+                    <h:outputText value="#{z.safeX}, #{z.safeY}, #{z.safeZ}"/>
+                </p:column>
+                <p:column headerText="Can Bind" sortBy="#{z.canBind}" width="75">
+                    <h:outputText value="#{z.canBind}"/>
+                </p:column>
+                <p:column headerText="Can Levitate" sortBy="#{z.canLevitate}" width="75">
+                    <h:outputText value="#{z.canLevitate}"/>
+                </p:column>
+                <p:column headerText="Outdoors" sortBy="#{z.castOutdoor}" width="75">
+                    <h:outputText value="#{z.castOutdoor}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+
+</ui:composition>

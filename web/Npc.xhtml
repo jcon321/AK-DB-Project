@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+        <title>Npcs</title>
+    </h:head> 
+
+    <h:body>
+        <h:form id="form1">
+            <p:dataTable id="dtNpc" selectionMode="single" sortMode="multiple"
+                         value="#{npcPageBean.npcs}" selection="#{npcPageBean.selectedNpc}"
+                         var="n">
+                <p:ajax event="rowSelect"/>
+                <p:column headerText="Npc ID" sortBy="#{n.id}" width="75">
+                    <h:outputText value="#{n.id}"/>
+                </p:column>
+                <p:column headerText="Name" sortBy="#{n.name}" width="300">
+                    <h:outputText value="#{n.name}"/>
+                </p:column>
+                <p:column headerText="Level" sortBy="#{n.level}" width="50">
+                    <h:outputText value="#{n.level}"/>
+                </p:column>
+                <p:column headerText="Class" sortBy="#{n.npcClass}" width="50">
+                    <h:outputText value="#{n.npcClass}"/>
+                </p:column>
+                <p:column headerText="AC" sortBy="#{n.AC}" width="50">
+                    <h:outputText value="#{n.AC}"/>
+                </p:column>
+                <p:column headerText="HP" sortBy="#{n.hp}" width="75">
+                    <h:outputText value="#{n.hp}"/>
+                </p:column>
+                <p:column headerText="Mana" sortBy="#{n.mana}" width="50">
+                    <h:outputText value="#{n.mana}"/>
+                </p:column>
+                <p:column headerText="STR" sortBy="#{n.STR}" width="50">
+                    <h:outputText value="#{n.STR}"/>
+                </p:column>
+                <p:column headerText="STA" sortBy="#{n.STA}" width="50">
+                    <h:outputText value="#{n.STA}"/>
+                </p:column>
+                <p:column headerText="AGI" sortBy="#{n.AGI}" width="50">
+                    <h:outputText value="#{n.AGI}"/>
+                </p:column>
+                <p:column headerText="DEX" sortBy="#{n.DEX}" width="50">
+                    <h:outputText value="#{n.DEX}"/>
+                </p:column>
+                <p:column headerText="INT" sortBy="#{n.INT}" width="50">
+                    <h:outputText value="#{n.INT}"/>
+                </p:column>
+                <p:column headerText="WIS" sortBy="#{n.WIS}" width="50">
+                    <h:outputText value="#{n.WIS}"/>
+                </p:column>
+                <p:column headerText="ATK" sortBy="#{n.ATK}" width="50">
+                    <h:outputText value="#{n.ATK}"/>
+                </p:column>
+                <p:column headerText="Min Dmg" sortBy="#{n.minDmg}" width="50">
+                    <h:outputText value="#{n.minDmg}"/>
+                </p:column>
+                <p:column headerText="Max Dmg" sortBy="#{n.maxDmg}" width="50">
+                    <h:outputText value="#{n.maxDmg}"/>
+                </p:column>
+                <p:column headerText="Run Speed" sortBy="#{n.runSpeed}" width="50">
+                    <h:outputText value="#{n.runSpeed}"/>
+                </p:column>
+                <p:column headerText="Attack Delay" sortBy="#{n.attackDelay}" width="50">
+                    <h:outputText value="#{n.attackDelay}"/>
+                </p:column>
+                <p:column headerText="MR" sortBy="#{n.MR}" width="50">
+                    <h:outputText value="#{n.MR}"/>
+                </p:column>
+                <p:column headerText="FR" sortBy="#{n.FR}" width="50">
+                    <h:outputText value="#{n.FR}"/>
+                </p:column>
+                <p:column headerText="CR" sortBy="#{n.CR}" width="50">
+                    <h:outputText value="#{n.CR}"/>
+                </p:column>
+                <p:column headerText="DR" sortBy="#{n.DR}" width="50">
+                    <h:outputText value="#{n.DR}"/>
+                </p:column>
+                <p:column headerText="PR" sortBy="#{n.PR}" width="50">
+                    <h:outputText value="#{n.PR}"/>
+                </p:column>
+                <p:column headerText="See Invis" sortBy="#{n.seeInvis}" width="50">
+                    <h:outputText value="#{n.seeInvis}"/>
+                </p:column>
+                <p:column headerText="See IVU" sortBy="#{n.seeInvisUndead}" width="50">
+                    <h:outputText value="#{n.seeInvisUndead}"/>
+                </p:column>
+                <p:column headerText="See SoS" sortBy="#{n.seeImprovedHide}" width="50">
+                    <h:outputText value="#{n.seeImprovedHide}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+
+</ui:composition>
