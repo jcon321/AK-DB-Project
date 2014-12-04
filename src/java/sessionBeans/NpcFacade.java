@@ -97,7 +97,40 @@ public class NpcFacade extends AbstractFacade<Npc> implements NpcFacadeLocal {
                 npc.setSeeInvis(rs.getBoolean("see_invis"));
                 npc.setSeeInvisUndead(rs.getBoolean("see_invis_undead"));
                 npc.setSeeImprovedHide(rs.getBoolean("see_improved_hide"));
+                npc.setSpawnChance(getSpawnChance(npc.getId()));
                 result.add(npc);
+            }
+        } catch (NamingException | SQLException ex) {
+            logger.log(Level.SEVERE, "", ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (s != null) {
+                    s.close();
+                }
+            } catch (SQLException ex) {
+                logger.log(Level.SEVERE, "", ex);
+            }
+        }
+        return (result);
+    }
+    
+    private Integer getSpawnChance(Long npcId) {
+        Integer result = 0;
+        Context c;
+        Connection conn = null;
+        Statement s = null;
+        try {
+            c = new InitialContext();
+            DataSource ds = (DataSource) c.lookup("jdbc/AK");
+            conn = ds.getConnection();
+            s = conn.createStatement();
+            String query = "Select chance from spawnentry where npcID = " + npcId;
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()) {
+                result = rs.getInt("chance");
             }
         } catch (NamingException | SQLException ex) {
             logger.log(Level.SEVERE, "", ex);

@@ -101,6 +101,8 @@ public class Npc implements Serializable {
     
     @Column(name = "see_improved_hide")
     private boolean seeImprovedHide;
+    
+    private Integer spawnChance;
 
     public Long getId() {
         return id;
@@ -316,6 +318,14 @@ public class Npc implements Serializable {
 
     public void setSeeImprovedHide(boolean seeImprovedHide) {
         this.seeImprovedHide = seeImprovedHide;
+    }
+
+    public Integer getSpawnChance() {
+        return spawnChance;
+    }
+
+    public void setSpawnChance(Integer spawnChance) {
+        this.spawnChance = spawnChance;
     }
 
     @Override
