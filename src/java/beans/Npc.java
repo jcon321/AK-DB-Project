@@ -104,6 +104,8 @@ public class Npc implements Serializable {
     
     private Integer spawnChance;
 
+    private Integer respawnTime;
+    
     public Long getId() {
         return id;
     }
@@ -326,6 +328,14 @@ public class Npc implements Serializable {
 
     public void setSpawnChance(Integer spawnChance) {
         this.spawnChance = spawnChance;
+    }
+
+    public Integer getRespawnTime() {
+        return respawnTime;
+    }
+
+    public void setRespawnTime(Integer respawnTime) {
+        this.respawnTime = respawnTime;
     }
 
     @Override

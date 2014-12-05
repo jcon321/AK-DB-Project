@@ -30,9 +30,9 @@ import javax.sql.DataSource;
 @PersistenceContext(name = "persistence/AKPU", unitName = "AKPU")
 @Stateless
 public class NpcFacade extends AbstractFacade<Npc> implements NpcFacadeLocal {
-
+    
     private static final Logger logger = Logger.getLogger("NpcFacade");
-
+    
     @Override
     protected EntityManager getEntityManager() {
         EntityManager em = null;
@@ -44,11 +44,11 @@ public class NpcFacade extends AbstractFacade<Npc> implements NpcFacadeLocal {
         }
         return em;
     }
-
+    
     public NpcFacade() {
         super(Npc.class);
     }
-
+    
     @Override
     public List<Npc> findAllByZone(String zone) {
         List<Npc> result = new ArrayList<>();
@@ -98,6 +98,7 @@ public class NpcFacade extends AbstractFacade<Npc> implements NpcFacadeLocal {
                 npc.setSeeInvisUndead(rs.getBoolean("see_invis_undead"));
                 npc.setSeeImprovedHide(rs.getBoolean("see_improved_hide"));
                 npc.setSpawnChance(getSpawnChance(npc.getId()));
+                npc.setRespawnTime(getRespawnTime(npc.getId()));
                 result.add(npc);
             }
         } catch (NamingException | SQLException ex) {
@@ -131,6 +132,39 @@ public class NpcFacade extends AbstractFacade<Npc> implements NpcFacadeLocal {
             ResultSet rs = s.executeQuery(query);
             while (rs.next()) {
                 result = rs.getInt("chance");
+            }
+        } catch (NamingException | SQLException ex) {
+            logger.log(Level.SEVERE, "", ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (s != null) {
+                    s.close();
+                }
+            } catch (SQLException ex) {
+                logger.log(Level.SEVERE, "", ex);
+            }
+        }
+        return (result);
+    }
+    
+    private Integer getRespawnTime(Long npcId) {
+        Integer result = 0;
+        Context c;
+        Connection conn = null;
+        Statement s = null;
+        try {
+            c = new InitialContext();
+            DataSource ds = (DataSource) c.lookup("jdbc/AK");
+            conn = ds.getConnection();
+            s = conn.createStatement();
+            String query = "select respawntime from spawn2 where spawngroupID = "
+                    + "(select spawngroupID from spawnentry where npcID = " + npcId + ")";
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()) {
+                result = rs.getInt("respawntime") / 60;
             }
         } catch (NamingException | SQLException ex) {
             logger.log(Level.SEVERE, "", ex);
