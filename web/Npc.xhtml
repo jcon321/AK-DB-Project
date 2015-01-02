@@ -14,7 +14,7 @@
 
     <h:body>
         <h:form id="form1">
-            <p:dataTable id="dtNpc" selectionMode="single" sortMode="multiple"
+            <p:dataTable id="dtNpc" sortMode="multiple"
                          value="#{npcPageBean.npcs}" selection="#{npcPageBean.selectedNpc}"
                          var="n">
                 <p:ajax event="rowSelect"/>
@@ -44,6 +44,12 @@
                 </p:column>
                 <p:column headerText="Mana" sortBy="#{n.mana}" width="50">
                     <h:outputText value="#{n.mana}"/>
+                </p:column>
+                <p:column headerText="Min Cash" sortBy="#{n.minCash}" width="50">
+                    <h:outputText value="#{n.minCash}"/>
+                </p:column>
+                <p:column headerText="Max Cash" sortBy="#{n.maxCash}" width="75">
+                    <h:outputText value="#{n.maxCash}"/>
                 </p:column>
                 <p:column headerText="STR" sortBy="#{n.STR}" width="50">
                     <h:outputText value="#{n.STR}"/>

@@ -106,12 +106,32 @@ public class Npc implements Serializable {
 
     private Integer respawnTime;
     
+    private Integer minCash;
+    
+    private Integer maxCash;
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getMinCash() {
+        return minCash;
+    }
+
+    public void setMinCash(Integer minCash) {
+        this.minCash = minCash;
+    }
+
+    public Integer getMaxCash() {
+        return maxCash;
+    }
+
+    public void setMaxCash(Integer maxCash) {
+        this.maxCash = maxCash;
     }
 
     public String getName() {

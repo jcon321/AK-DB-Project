@@ -99,6 +99,8 @@ public class NpcFacade extends AbstractFacade<Npc> implements NpcFacadeLocal {
                 npc.setSeeImprovedHide(rs.getBoolean("see_improved_hide"));
                 npc.setSpawnChance(getSpawnChance(npc.getId()));
                 npc.setRespawnTime(getRespawnTime(npc.getId()));
+                npc.setMinCash(getMinCash(npc.getName()));
+                npc.setMaxCash(getMaxCash(npc.getName()));
                 result.add(npc);
             }
         } catch (NamingException | SQLException ex) {
@@ -165,6 +167,70 @@ public class NpcFacade extends AbstractFacade<Npc> implements NpcFacadeLocal {
             ResultSet rs = s.executeQuery(query);
             while (rs.next()) {
                 result = rs.getInt("respawntime") / 60;
+            }
+        } catch (NamingException | SQLException ex) {
+            logger.log(Level.SEVERE, "", ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (s != null) {
+                    s.close();
+                }
+            } catch (SQLException ex) {
+                logger.log(Level.SEVERE, "", ex);
+            }
+        }
+        return (result);
+    }
+    
+    private Integer getMinCash(String name) {
+        Integer result = 0;
+        Context c;
+        Connection conn = null;
+        Statement s = null;
+        try {
+            c = new InitialContext();
+            DataSource ds = (DataSource) c.lookup("jdbc/AK");
+            conn = ds.getConnection();
+            s = conn.createStatement();
+            String query = "select mincash from loottable where name like '" + name + "' limit 1";
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()) {
+                result = rs.getInt("mincash");
+            }
+        } catch (NamingException | SQLException ex) {
+            logger.log(Level.SEVERE, "", ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (s != null) {
+                    s.close();
+                }
+            } catch (SQLException ex) {
+                logger.log(Level.SEVERE, "", ex);
+            }
+        }
+        return (result);
+    }
+    
+    private Integer getMaxCash(String name) {
+        Integer result = 0;
+        Context c;
+        Connection conn = null;
+        Statement s = null;
+        try {
+            c = new InitialContext();
+            DataSource ds = (DataSource) c.lookup("jdbc/AK");
+            conn = ds.getConnection();
+            s = conn.createStatement();
+            String query = "select maxcash from loottable where name like '" + name + "' limit 1";
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()) {
+                result = rs.getInt("maxcash");
             }
         } catch (NamingException | SQLException ex) {
             logger.log(Level.SEVERE, "", ex);
